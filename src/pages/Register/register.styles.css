@@ -1,0 +1,47 @@
+.purple {
+  text-align: center;
+  color: rgb(175, 0, 175);
+  margin: 5px;
+}
+
+.css-1w1rijm-MuiButtonBase-root-MuiButton-root {
+  background-color: rgb(175, 0, 175);
+}
+
+.para {
+  color: grey;
+  font-weight: 600;
+  text-align: center;
+  margin: 5px;
+}
+/* .error-message {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 500;
+} */
+
+.css-1laqsz7-MuiInputAdornment-root {
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+.css-1w1g4y1-MuiInputBase-root-MuiInput-root {
+  width: 211%;
+  margin-bottom: 10px;
+}
+
+.css-1yf2sd5-MuiFormControl-root {
+  width: 211%;
+}
+
+img {
+  height: 99px;
+  width: 123px;
+  align-self: center;
+  margin: 10px;
+  /* background-color: red; */
+}
+
+.link {
+  margin: 15px;
+  text-align: center;
+}

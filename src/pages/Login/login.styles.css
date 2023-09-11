@@ -1,0 +1,19 @@
+.main-body {
+  background-image: url("../../../public/Image resources/low-poly-grid-haikei.svg");
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  /* background-repeat: no-repeat; */
+}
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.6)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}

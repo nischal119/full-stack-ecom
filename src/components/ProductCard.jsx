@@ -12,12 +12,13 @@ import { BsSearch } from "react-icons/bs";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { deleteProduct } from "../lib/product.api";
+import SkeletonLoader from "./SkeletonLoader";
 
 const ProductCard = (props) => {
   console.log(props);
   const queryClient = useQueryClient(); //? for automatic fetch of new data after deletion
   const { _id, name, price, category, company } = props;
-  console.log(name, "name");
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const navigate = useNavigate();
@@ -56,7 +57,8 @@ const ProductCard = (props) => {
   // };
 
   if (deleteProductMutation.isLoading) {
-    return <CircularProgress />;
+    // return <CircularProgress />;
+    return <SkeletonLoader />;
   }
   return (
     <>

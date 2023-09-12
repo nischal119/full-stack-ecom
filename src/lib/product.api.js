@@ -17,3 +17,10 @@ export const addProduct = async (values) => {
 export const getBuyerProducts = async (paginationData) => {
   return await $axios.post("/product/buyer/all", paginationData);
 };
+export const getProductDetails = async (id) => {
+  return await $axios.get(`/product/details/${id}`);
+};
+
+export const editProduct = async (productId, values) => {
+  return await $axios.put(`/product/edit/${productId}`, values);
+};

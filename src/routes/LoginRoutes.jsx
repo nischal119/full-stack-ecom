@@ -2,6 +2,7 @@ import AddProductForm from "../components/AddProductForm";
 import Mainlayout from "../layout/Mainlayout";
 import About from "../pages/About/About";
 import Cart from "../pages/Cart";
+import EditProduct from "../pages/EditProduct";
 import Home from "../pages/Home/Home";
 import Product from "../pages/Product";
 import Productsdetails from "../pages/Productsdetails";
@@ -34,6 +35,10 @@ const loginRoutes = [
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "/product/edit/:id",
+        element: <EditProduct />,
       },
     ],
   },

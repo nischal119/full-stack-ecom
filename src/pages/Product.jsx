@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import SelllerProduct from "./SelllerProduct";
+import { Box, Button, TextField } from "@mui/material";
+import React from "react";
 import BuyerProduct from "./BuyerProduct";
-import { Box, Button, TextField, useForkRef } from "@mui/material";
-import FilterProduct from "../components/FilterProduct";
+import SelllerProduct from "./SelllerProduct";
 
-import AmountInput from "../components/AmountInput";
-import ProductFilter from "../components/ProductFilter";
 import { useDispatch } from "react-redux";
+import ProductFilter from "../components/ProductFilter";
 import { resetFilter, setSearchText } from "../redux store/slice/productSlice";
 
 const Product = () => {

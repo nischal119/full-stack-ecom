@@ -35,10 +35,15 @@ body {
 .card:hover {
   transition: boxShadow ease-in-out 1;
 }
-.product-card > img:hover {
+
+.product-card > img {
   transform: scale(1.3);
-  transition: all 0.8s ease-out;
+  transition: transform 0.8s;
   cursor: zoom-in;
+  object-fit: cover;
+}
+.product-card > img:hover {
+  transform: scale(1.5);
 }
 .bold-para > p,
 .bold-para > button {

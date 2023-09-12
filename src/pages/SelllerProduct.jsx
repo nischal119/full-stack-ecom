@@ -9,6 +9,7 @@ import ProductCard from "../components/ProductCard";
 import { fetchSellerProducts } from "../lib/product.api";
 import { useDispatch, useSelector } from "react-redux";
 import { openErrorSnackBar } from "../redux store/slice/snackbarslice";
+import SkeletonLoader from "../components/SkeletonLoader";
 const SelllerProduct = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -110,6 +111,7 @@ const SelllerProduct = (props) => {
               }}
             >
               {getSellerProductQuery?.data?.data?.products.map((item) => {
+                // if (getSellerProductQuery.isLoading) return <SkeletonLoader />;
                 return (
                   <ProductCard
                     key={item._id}

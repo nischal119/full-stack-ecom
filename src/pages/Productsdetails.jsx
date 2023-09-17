@@ -34,8 +34,9 @@ const Productsdetails = () => {
       try {
         setLoading(true);
         const response = await $axios.get(`/product/details/${productId}`);
-        setProductDetail(response.data);
-        console.log(productDetail);
+
+        setProductDetail(response?.data);
+
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -132,7 +133,6 @@ const Productsdetails = () => {
                 variant="contained"
                 onClick={() => {
                   addItemToCartMutate();
-                  navigate("/cart");
                 }}
               >
                 Add to cart

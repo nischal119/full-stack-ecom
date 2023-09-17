@@ -48,55 +48,55 @@ const BuyerProduct = () => {
       )
     );
   }
+  return (
+    <Box>
+      <div>
+        <Box>
+          {data?.data?.products?.length === 0 ? (
+            <div>
+              <EmptyPage />
+              <h1 style={{ textAlign: "center" }}>
+                OOPS! <br /> No products found
+              </h1>
+            </div>
+          ) : (
+            <>
+              <Grid
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "25px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {data?.data?.products?.map((item) => {
+                  // console.log("item", item);
 
-  <Box>
-    <div>
-      <Box>
-        {data?.data?.products?.length === 0 ? (
-          <div>
-            <EmptyPage />
-            <h1 style={{ textAlign: "center" }}>
-              OOPS! <br /> No products found
-            </h1>
+                  return <ProductCard key={item._id} {...item} />;
+                })}
+              </Grid>
+            </>
+          )}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "40px 0px 0px 0px",
+            }}
+          >
+            <Pagination
+              onChange={paginationData}
+              count={data?.data?.totalPage}
+              page={page}
+              shape="rounded"
+            />
           </div>
-        ) : (
-          <>
-            <Grid
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "25px",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              {data?.data?.products?.map((item) => {
-                // console.log("item", item);
-
-                return <ProductCard key={item._id} {...item} />;
-              })}
-            </Grid>
-          </>
-        )}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "40px 0px 0px 0px",
-          }}
-        >
-          <Pagination
-            onChange={paginationData}
-            count={data?.data?.totalPage}
-            page={page}
-            shape="rounded"
-          />
-        </div>
-      </Box>
-    </div>
-  </Box>;
-  return <div></div>;
+        </Box>
+      </div>
+    </Box>
+  );
 };
 
 export default BuyerProduct;

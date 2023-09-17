@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
+
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -7,13 +7,33 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FaShoppingCart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Avatar, Badge } from "@mui/material";
+import { Avatar, Badge, Button } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
+import { BiExit } from "react-icons/bi";
+
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+
 const Header = () => {
+  const userRole = localStorage.getItem("userRole");
   const [searchText, setSearchText] = useState([]);
   console.log(searchText);
   const navigate = useNavigate();
   const userFirstName = localStorage.getItem("firstName");
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
   return (
     <div>
       <div>
@@ -92,35 +112,87 @@ const Header = () => {
                     About
                   </NavLink>
                 </Nav>
-
-                <Nav.Link
-                  href="#action2"
-                  style={{
-                    fontSize: "25px",
-                    padding: "30px",
-                    color: "white",
-                  }}
-                >
-                  <Badge badgeContent={1} color="primary">
-                    <FaShoppingCart />
-                  </Badge>
-                </Nav.Link>
-                <Nav.Link
-                  href="#action2"
-                  style={{ fontSize: "20px", marginLeft: "10px" }}
-                >
+                {userRole === "buyer" && (
+                  <NavLink
+                    to="/cart"
+                    style={{
+                      fontSize: "25px",
+                      alignSelf: "center",
+                      color: "white",
+                      marginRight: "10px",
+                    }}
+                  >
+                    <Badge badgeContent={1} color="primary">
+                      <FaShoppingCart />
+                    </Badge>
+                  </NavLink>
+                )}
+                <div style={{ fontSize: "20px", margin: "5px" }}>
                   <span
                     style={{
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
                       alignItems: "center",
+                      padding: "10px",
                     }}
                   >
                     <Avatar alt="Remy Sharp" src="" />
-                    Namastey {userFirstName} !
+                    <p style={{ color: "white" }}>
+                      {" "}
+                      Namastey {userFirstName} !
+                    </p>
+                    <Button
+                      color="error"
+                      aria-describedby={id}
+                      variant="contained"
+                      onClick={handleClick}
+                    >
+                      <BiExit />
+                    </Button>
                   </span>
-                </Nav.Link>
+                  <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>
+                      <div style={{}}>
+                        <h5 style={{ textAlign: "center" }}>Log out?</h5>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Button
+                            sx={{ marginRight: "20px" }}
+                            variant="contained"
+                            color="success"
+                            onClick={handleClose}
+                          >
+                            NO
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              localStorage.clear();
+                              navigate("/login");
+                            }}
+                            variant="contained"
+                            color="error"
+                          >
+                            Yes
+                          </Button>
+                        </div>
+                      </div>
+                    </Typography>
+                  </Popover>
+                </div>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

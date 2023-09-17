@@ -41,7 +41,9 @@ const EditProduct = () => {
   const editProductMutation = useMutation({
     mutationKey: ["edit-product"],
     mutationFn: (values) => editProduct(productId, values),
-    onSuccess: () => {},
+    onSuccess: () => {
+      navigate(`/products/details/${productId}`);
+    },
     onError: (error) => {
       dispatch(
         openErrorSnackBar(
@@ -113,7 +115,6 @@ const EditProduct = () => {
           })}
           onSubmit={(values) => {
             editProductMutation.mutate(values);
-            navigate(`/products/details/${productId}`);
           }}
         >
           {({ handleSubmit, getFieldProps, errors, touched, values }) => (

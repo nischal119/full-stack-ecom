@@ -1,6 +1,6 @@
-import { Box, CircularProgress, Grid, Pagination } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Pagination } from "@mui/material";
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import CustomSnackbar from "../components/CustomSnackbar";
@@ -78,11 +78,26 @@ const SelllerProduct = (props) => {
     <div>
       <Box>
         {getSellerProductQuery?.data?.data?.products?.length === 0 ? (
-          <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
             <EmptyPage />
             <h1 style={{ textAlign: "center" }}>
               OOPS! <br /> No products found
             </h1>
+            <Button
+              onClick={() => {
+                navigate("/products/add");
+              }}
+              variant="contained"
+            >
+              Add some now?
+            </Button>
           </div>
         ) : (
           <>
@@ -96,7 +111,10 @@ const SelllerProduct = (props) => {
             >
               <Grid item sx={{}}>
                 {" "}
-                <Button onClick={() => navigate("/products/add")}>
+                <Button
+                  variant="contained"
+                  onClick={() => navigate("/products/add")}
+                >
                   Add Product
                 </Button>
               </Grid>

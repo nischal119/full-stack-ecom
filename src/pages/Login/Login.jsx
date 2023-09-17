@@ -24,6 +24,7 @@ const Login = () => {
       localStorage.setItem("accesstoken", response?.data?.access_token);
       localStorage.setItem("userRole", response?.data?.user?.role);
       localStorage.setItem("firstName", response?.data?.user?.firstName);
+      localStorage.setItem("isLoggedIn", true);
       navigate("/home");
       dispatch(
         openSuccessSnackBar(
@@ -102,6 +103,16 @@ const Login = () => {
                   {...formik.getFieldProps("email")}
                   sx={{
                     width: "24vw",
+                    "& .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+                      color: "white",
+                    },
+                    "& .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused":
+                      {
+                        color: "white",
+                      },
+                    "&.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
+                      color: "white",
+                    },
                   }}
                 />
                 {formik.touched.email && formik.errors.email ? (
@@ -115,7 +126,19 @@ const Login = () => {
                   type="password"
                   name="password"
                   {...formik.getFieldProps("password")}
-                  sx={{ width: "24vw" }}
+                  sx={{
+                    width: "24vw",
+                    "& .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root": {
+                      color: "white",
+                    },
+                    "& .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused":
+                      {
+                        color: "white",
+                      },
+                    "&.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
+                      color: "white",
+                    },
+                  }}
                 />
                 {formik.touched.password && formik.errors.password ? (
                   <div className="error-message">{formik.errors.password}</div>

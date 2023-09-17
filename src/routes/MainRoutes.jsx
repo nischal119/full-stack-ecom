@@ -1,3 +1,4 @@
+import AuthenticationGaurd from "../Gaurd/AuthenticationGaurd";
 import AddProductForm from "../components/AddProductForm";
 import Mainlayout from "../layout/Mainlayout";
 import About from "../pages/About/About";
@@ -7,10 +8,14 @@ import Home from "../pages/Home/Home";
 import Product from "../pages/Product";
 import Productsdetails from "../pages/Productsdetails";
 const userRole = localStorage.getItem("userRole");
-const loginRoutes = [
+const MainRoutes = [
   {
     path: "/",
-    element: <Mainlayout />,
+    element: (
+      <AuthenticationGaurd>
+        <Mainlayout />,
+      </AuthenticationGaurd>
+    ),
     children: [
       {
         path: "home",
@@ -44,4 +49,4 @@ const loginRoutes = [
   },
 ];
 
-export default loginRoutes;
+export default MainRoutes;

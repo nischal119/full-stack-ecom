@@ -13,6 +13,8 @@ import { BiExit } from "react-icons/bi";
 
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
+import { useQuery } from "react-query";
+import { getCartCount } from "../lib/cart.api";
 
 const Header = () => {
   const userRole = localStorage.getItem("userRole");
@@ -33,6 +35,11 @@ const Header = () => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["cart-item-count"],
+    queryFn: () => getCartCount(),
+  });
 
   return (
     <div>
@@ -122,7 +129,10 @@ const Header = () => {
                       marginRight: "10px",
                     }}
                   >
-                    <Badge badgeContent={1} color="primary">
+                    <Badge
+                      badgeContent={data?.data?.itemCount || "0"}
+                      color="primary"
+                    >
                       <FaShoppingCart />
                     </Badge>
                   </NavLink>

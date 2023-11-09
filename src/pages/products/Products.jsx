@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { $axios } from "../../../lib/axios";
-
+import Loader from "../../components/Loader";
 const Products = () => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
@@ -22,20 +22,19 @@ const Products = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-  if (loading)
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress color="success" />
-      </div>
-    );
-  return <div></div>;
+  if (loading) return <Loader />;
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <CircularProgress color="success" />
+    </div>
+  );
 };
 
 export default Products;

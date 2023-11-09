@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import { Chip, CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -108,7 +108,7 @@ const ProductCard = (props) => {
                 {name}
               </Typography>
               <Typography gutterBottom variant="h5" component="div">
-                ({company})
+                <Chip label="primary" color="primary" />
               </Typography>
             </div>
             <Typography

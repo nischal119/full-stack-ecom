@@ -1,11 +1,16 @@
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Button, Chip, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { AiOutlineMinus } from "react-icons/ai";
 import { GrAdd } from "react-icons/gr";
 import { useNavigate, useParams } from "react-router-dom";
 import { $axios } from "../lib/axios";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { addItemToCart } from "../lib/cart.api";
+import {
+  openErrorSnackBar,
+  openSuccessSnackBar,
+} from "../redux store/slice/snackbarslice";
+import { useDispatch } from "react-redux";
 
 const Productsdetails = () => {
   const [productDetail, setProductDetail] = useState({});
@@ -15,7 +20,8 @@ const Productsdetails = () => {
   const params = useParams();
   const productId = params.id;
   const userRole = localStorage.getItem("userRole");
-
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const {
     mutate: addItemToCartMutate,
     isLoading,
@@ -28,7 +34,19 @@ const Productsdetails = () => {
         quantity: counter,
       });
     },
+    onSuccess: () => {
+      dispatch(openSuccessSnackBar(` ${productDetail.name} added to cart`));
+      queryClient.invalidateQueries("cart-item-count");
+      navigate("/products");
+    },
+    onError: () => {
+      dispatch(
+        openErrorSnackBar(` ${productDetail.name} cannot be added to cart`)
+      );
+      navigate("/products");
+    },
   });
+
   useEffect(() => {
     const getProductDetails = async () => {
       try {
@@ -91,10 +109,21 @@ const Productsdetails = () => {
           <p>Brand : {productDetail.company}</p>
           <p>Price : {productDetail.price} </p>
           <p>Quantity : {productDetail.quantity} </p>
-          <p>Category : {productDetail.category} </p>
+          <p>
+            Avaibility:{" "}
+            <Chip
+              label={productDetail.quantity > 0 ? "In Stock" : "Out of Stock"}
+              color={productDetail.quantity > 0 ? "success" : "error"}
+              variant="outlined"
+            />{" "}
+          </p>
+          <p>
+            Category : <Chip label={productDetail.category} color="primary" />{" "}
+          </p>
           <p>
             Free Shipping : {productDetail.freeShipping === true ? "Yes" : "No"}{" "}
           </p>
+
           {userRole === "buyer" && (
             <>
               <div style={{ display: "flex", margin: "10px" }}>

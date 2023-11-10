@@ -22,19 +22,19 @@ const Products = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-  if (loading) return <Loader />;
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <CircularProgress color="success" />
-    </div>
-  );
+  if (loading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress color="success" />
+      </div>
+    );
 };
 
 export default Products;

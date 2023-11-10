@@ -109,6 +109,8 @@ const Productsdetails = () => {
           <p>Brand : {productDetail.company}</p>
           <p>Price : {productDetail.price} </p>
           <p>Quantity : {productDetail.quantity} </p>
+
+          <p>Description : {productDetail.description} </p>
           <p>
             Avaibility:{" "}
             <Chip

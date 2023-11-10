@@ -15,12 +15,11 @@ import { deleteProduct } from "../lib/product.api";
 import SkeletonLoader from "./SkeletonLoader";
 
 const ProductCard = (props) => {
-  console.log(props);
   const queryClient = useQueryClient(); //? for automatic fetch of new data after deletion
-  const { _id, name, price, category, company } = props;
+  const { _id, name, price, company, description, imageUrl } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const [localUrl, setLocalUrl] = useState(null);
   const navigate = useNavigate();
   const userRole = localStorage.getItem("userRole");
 
@@ -78,22 +77,15 @@ const ProductCard = (props) => {
         >
           <CardMedia
             onClick={() => navigate(`/products/details/${_id}`)}
-            style={
-              {
-                // width: "250px",
-                // height: "200px",
-                // borderRadius: "20px",
-                // boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                // background: "linear-gradient(to left, wheat, white)",
-              }
-            }
             className="product-card"
             component="img"
-            alt="green iguana"
+            alt={name}
             height="140"
-            image="https://cdn.originpc.com/img/compare-all/gaming-desktops/genesis-7000-series-system-image.png"
+            src={imageUrl}
+            // image={imageUrl}
             sx={{ objectFit: "contain" }}
           />
+          {console.log("image url", imageUrl)}
           <CardContent>
             <div
               style={{
@@ -107,8 +99,9 @@ const ProductCard = (props) => {
               <Typography gutterBottom variant="h5" component="div">
                 {name}
               </Typography>
+
               <Typography gutterBottom variant="h5" component="div">
-                <Chip label="primary" color="primary" />
+                <Chip label={company} color="primary" />
               </Typography>
             </div>
             <Typography
@@ -121,8 +114,7 @@ const ProductCard = (props) => {
               Rs. {price}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+              {description.slice(0, 150)}...
             </Typography>
           </CardContent>
           <CardActions

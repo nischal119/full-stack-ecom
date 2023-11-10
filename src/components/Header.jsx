@@ -107,7 +107,7 @@ const Header = () => {
                     Products
                   </NavLink>
 
-                  <NavLink
+                  {/* <NavLink
                     to="/about"
                     style={{
                       fontSize: "18px",
@@ -117,7 +117,7 @@ const Header = () => {
                     }}
                   >
                     About
-                  </NavLink>
+                  </NavLink> */}
                 </Nav>
                 {userRole === "buyer" && (
                   <NavLink
